@@ -13,6 +13,12 @@ VIM=/Applications/MacVim.app/Contents/MacOS/Vim
 # Number of runs
 NO_RUN=10
 
+
+########### ########### ########### ###########
+########### ########### ########### ###########
+
+SLEEP_SEC=0.5
+
 function show_help {
   echo "$0: -f -c"
 }
@@ -64,6 +70,7 @@ for t in $(seq $NO_RUN); do
   cat vimrc_top > vimrc_testing
   cat vimrc_nobm_bundles >> vimrc_testing
   cat vimrc_bottom >> vimrc_testing
+  sleep $SLEEP_SEC
   S=$(date +%s.%N)
   $VIM -u vimrc_testing +:q 
   E=$(date +%s.%N)
@@ -90,6 +97,7 @@ do
 
   TOT=0  # running sum in nanoseconds
   for t in $(seq $NO_RUN); do
+    sleep $SLEEP_SEC
     S=$(date +%s.%N)
     $VIM -u vimrc_testing +:q
     E=$(date +%s.%N)
