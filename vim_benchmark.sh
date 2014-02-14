@@ -2,10 +2,38 @@
 # Check the loading time of the various vundle scripts
 #
 
+# Defaults
+
+# Location of vimrc
+VIMRC="$HOME/.vimrc"
+
 # Location of the vim file
 VIM=/Applications/MacVim.app/Contents/MacOS/Vim
-VIMRC="$HOME/.vimrc"
+
+# Number of runs
 NO_RUN=10
+
+function show_help {
+  echo "$0: -f -c"
+}
+
+while getopts "h?v:r:n:" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    v)  VIM=$OPTARG 
+        ;;
+    r)  VIMRC=$OPTARG
+        ;;
+    n)  NO_RUN=$OPTARG
+        ;;
+    esac
+done
+
+echo "Using vimrc: $VIMRC"
+echo "Using vim: $VIM"
 
 # Count the "header" portion
 # This is the part up to the first Bundle
